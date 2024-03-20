@@ -1,7 +1,6 @@
 package class047;
 
 import java.io.*;
-import java.util.Arrays;
 
 public class ArithmeticSequenceDifference {
     public static int maxsize = 10000005;
@@ -38,9 +37,9 @@ public class ArithmeticSequenceDifference {
             build();
             max = 0;
             xor = 0;
-            for( int i = 0; i<=n; i++){
+            for( int i = 1; i<=n; i++){
                 max = Math.max(max, nums[i]);
-                xor ^= nums[0];
+                xor ^= nums[i];
             }
 
             out.println(xor + " " + max);
@@ -53,7 +52,6 @@ public class ArithmeticSequenceDifference {
     }
 
     public static void set(int l, int r, int s ,int e, int d){
-        Arrays.fill(nums, 0);
         nums[l] += s;
         nums[l+1] += d-s;
         nums[r+1] -= e+d;
