@@ -12,11 +12,11 @@ public class SameMod {
 
     //get the result of ((a+b)*(c-d)+(a*c-b*d))%mod
     public static int f1(long a, long b, long c, long d, int mod){
-
+        return 0;
     }
 
-    publi static int f2(long a, long b, long c, long d, int mod){
-
+    public static int f2(long a, long b, long c, long d, int mod){
+        return 0;
     }
 
 
