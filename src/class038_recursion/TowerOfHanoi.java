@@ -48,9 +48,12 @@ public class TowerOfHanoi {
     }
 
     public static void main(String[] args){
-        int n  = 20;
+        int n  = 3;
         hanoi(n);
         hanoi2(n);
+
+        StringBuilder ans = new StringBuilder();
+
 
         for(int i =0; i < ans1.size(); i++){
             if(ans1.get(i).equals(ans2.get(i))){
