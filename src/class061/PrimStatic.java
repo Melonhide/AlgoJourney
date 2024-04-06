@@ -50,25 +50,36 @@ public class PrimStatic {
     public static boolean isEmpty(){
         return heapsize == 0;
     }
-    public static int[] pop(){
-        int u = heap[0][0];
-        int v = heap[0][1];
-        int[] res = new int[] {u, v};
+
+    public static int u, w;
+    public static void pop(){
+        u = heap[0][0];
+        w = heap[0][1];
+
         swap(0, --heapsize);
         heapify(0);
         where[u] = -2;
-        return res;
+        nodecnt++;
     }
 
     public static void addOrUpdateOrIgnore(int e1){
         int v = to[e1];
-
+        int w = weights[e1];
+        if(where[v] == -1){
+            heap[heapsize][0] = v;
+            heap[heapsize][1] = w;
+            where[v] = heapsize++;
+            heap_insert(where[v]);
+        }else if(where[v]>=0){
+            heap[where[v]][1] = Math.min(w, heap[where[v]][1]);
+            heap_insert(where[v]);
+        }
     }
 
 
 
     public static void addEdge(int u, int v, int w){
-        next[u] = heads[u];
+        next[cnt] = heads[u];
         to[cnt] = v;
         weights[cnt] = w;
         heads[u] = cnt++;
@@ -99,14 +110,32 @@ public class PrimStatic {
                 w = (int) in.nval;
                 addEdge(u, v, w);
             }
-
+            int ans = prim();
+            out.println(nodecnt==n? ans:"orz");
         }
 
+        out.flush();
+        out.close();
+        br.close();
     }
 
     public static int prim(){
         nodecnt = 1;
+        where[1] = -2;
+        for(int e = heads[1]; e>0; e = next[e]){
+            addOrUpdateOrIgnore(e);
+        }
 
+        int ans = 0;
+        while(!isEmpty()){
+            pop();
+            ans += w;
+            for(int e = heads[u]; e>0; e=next[e]){
+                addOrUpdateOrIgnore(e);
+            }
+        }
+
+        return ans;
     }
 
 }
