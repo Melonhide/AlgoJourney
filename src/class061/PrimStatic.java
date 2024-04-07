@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Arrays;
 
 public class PrimStatic {
-    public static int maxn = 5001, maxm = 200001;
+    public static int maxn = 5001, maxm = 400001;
     public static int m,n, cnt, heapsize, nodecnt;
 
     public static int[] heads = new int[maxn];
@@ -20,7 +20,7 @@ public class PrimStatic {
         int left = i*2+1;
         while(left<heapsize){
             int best = left+1<heapsize && heap[left+1][1]<heap[left][1]? left+1:left;
-            best = heap[i][1]<=heap[best][1]? i:best;
+            best = heap[i][1]<heap[best][1]? i:best;
             if(best == i){
                 break;
             }
@@ -109,6 +109,7 @@ public class PrimStatic {
                 in.nextToken();
                 w = (int) in.nval;
                 addEdge(u, v, w);
+                addEdge(v, u, w);
             }
             int ans = prim();
             out.println(nodecnt==n? ans:"orz");
