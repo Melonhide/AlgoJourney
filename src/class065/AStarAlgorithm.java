@@ -21,5 +21,6 @@ public class AStarAlgorithm {
                 distance[i][j] = Integer.MAX_VALUE;
             }
         }
+        distance[startX][startY] = 1;
     }
 }
