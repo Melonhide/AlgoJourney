@@ -33,8 +33,25 @@ public class AStarAlgorithm {
             int[] cur = heap.poll();
             int x = cur[0];
             int y = cur[1];
+            if(visited[x][y]){
+                continue;
+            }
 
+            if(x == targetX && y == targetY){
+                return distance[x][y];
+            }
+
+            for(int i = 0, nx, ny; i<4; i++){
+                nx = x+move[i];
+                ny = y+move[i+1];
+                if(nx>=0&&nx<m && ny>=0 && ny<n && grid[nx][ny] == 1
+                        && !visited[nx][ny] && distance[x][y]+1<distance[nx][ny]){
+                    distance[nx][ny] = distance[x][y]+1;
+                    heap.add(new int[] {nx,ny,distance[nx][ny]});
+                }
+            }
         }
+        return -1;
 
     }
 }
