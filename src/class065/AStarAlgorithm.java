@@ -29,6 +29,12 @@ public class AStarAlgorithm {
         PriorityQueue<int[]> heap = new PriorityQueue<>((a,b)->a[2]-b[2]);
         heap.add(new int[] {startX, startY, 1});
 
+        while(!heap.isEmpty()){
+            int[] cur = heap.poll();
+            int x = cur[0];
+            int y = cur[1];
+
+        }
 
     }
 }
