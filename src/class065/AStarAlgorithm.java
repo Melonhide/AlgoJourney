@@ -1,5 +1,7 @@
 package class065;
 
+import java.util.PriorityQueue;
+
 public class AStarAlgorithm {
     public static int[] move = new int[] {-1,0,1,0,-1};
 
@@ -22,5 +24,11 @@ public class AStarAlgorithm {
             }
         }
         distance[startX][startY] = 1;
+        boolean[][] visited = new boolean[m][n];
+
+        PriorityQueue<int[]> heap = new PriorityQueue<>((a,b)->a[2]-b[2]);
+        heap.add(new int[] {startX, startY, 1});
+
+
     }
 }
