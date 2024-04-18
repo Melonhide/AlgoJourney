@@ -10,7 +10,25 @@ public class MinimumDeleteBecomeSubstring {
         return 0;
     }
 
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
+        // 测试的数据量比较小
+        // 那是因为数据量大了，暴力方法过不了
+        // 但是这个数据量足够说明正式方法是正确的
+        int n = 12;
+        int v = 3;
+        int testTime = 20000;
+        System.out.println("测试开始");
+        for (int i = 0; i < testTime; i++) {
+            int len1 = (int) (Math.random() * n) + 1;
+            int len2 = (int) (Math.random() * n) + 1;
+            String s1 = randomString(len1, v);
+            String s2 = randomString(len2, v);
+            int ans1 = minDelete1(s1, s2);
+            int ans2 = minDelete2(s1, s2);
+            if (ans1 != ans2) {
+                System.out.println("出错了!");
+            }
+        }
+        System.out.println("测试结束");
     }
 }
