@@ -74,7 +74,6 @@ public class FillCellsUserAllColorsWays {
         }
         System.out.println("功能测试结束");
 
-        System.out.println(ways2(2, 2));
 
     }
 }
