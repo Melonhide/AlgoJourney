@@ -31,4 +31,12 @@ public class MinimumDeleteBecomeSubstring {
         }
         System.out.println("测试结束");
     }
+
+    public static String randomString(int n, int v) {
+        char[] ans = new char[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = (char) ('a' + (int) (Math.random() * v));
+        }
+        return String.valueOf(ans);
+    }
 }

@@ -11,7 +11,7 @@ package class068;
 
 import java.util.Arrays;
 
-public class FillCellsUserAllColorsWays {
+public class FillCellsUseAllColorsWays {
     public static int ways1(int n, int m){
         return process(new int[n], new boolean[m+1], 0, n, m);
     }
@@ -43,8 +43,19 @@ public class FillCellsUserAllColorsWays {
     public static int mod = 1000000007;
     public static int ways2(int n, int m){
 
+        for(int i = 1; i <= n; i++){
+            dp[i][1] = m;
+        }
 
-        return f(n, m, n, m);
+
+        for(int i = 2; i <= n; i++){
+            for(int j = 2, p1, p2; j<=m; j++){
+                p1 = (int) ((long)dp[i-1][j]*j % mod);
+                p2 = (int) ((long)dp[i-1][j-1]*(m-j+1) % mod);
+                dp[i][j] = (int) (((long) p1+p2)%mod);
+            }
+        }
+        return dp[n][m];
     }
 
     public static int f(int n, int m, int i, int j){
