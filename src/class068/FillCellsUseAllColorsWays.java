@@ -85,6 +85,16 @@ public class FillCellsUseAllColorsWays {
         }
         System.out.println("功能测试结束");
 
-
+        System.out.println("性能测试开始");
+        int n = 5000;
+        int m = 4877;
+        System.out.println("n : " + n);
+        System.out.println("m : " + m);
+        long start = System.currentTimeMillis();
+        int ans = ways2(n, m);
+        long end = System.currentTimeMillis();
+        System.out.println("取余之后的结果 : " + ans);
+        System.out.println("运行时间 : " + (end - start) + " 毫秒");
+        System.out.println("性能测试结束");
     }
 }
