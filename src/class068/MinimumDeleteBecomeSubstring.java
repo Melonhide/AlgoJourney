@@ -1,13 +1,55 @@
 package class068;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MinimumDeleteBecomeSubstring {
 
     public static int minDelete1(String s1, String s2){
-        return 0;
+        List<String> list = new ArrayList<>();
+        f(s1.toCharArray(), 0 , "", list);
+
+        list.sort((a,b)->b.length()-a.length());
+        for(String str: list){
+            if(s2.indexOf(str)!=-1){
+                return s1.length()-str.length();
+            }
+        }
+        return s1.length();
+    }
+
+    public static void f(char[] s1, int i, String path, List<String> list){
+        if(i == s1.length){
+            list.add(path);
+        }else{
+            f(s1, i+1, path, list);
+            f(s1, i+1, path+s1[i], list);
+        }
     }
 
     public static int minDelete2(String str1, String str2){
-        return 0;
+        int m = str1.length();
+        int n = str2.length();
+        char[] s1 = str1.toCharArray();
+        char[] s2 = str2.toCharArray();
+
+        int[][] dp = new int[m+1][n+1];
+
+        for(int i = 1; i <= m; i++){
+            dp[i][0] = i;
+            for(int j = 1; j<= n; j++){
+                if(s1[i-1] == s2[j-1]){
+                    dp[i][j] = dp[i-1][j-1];
+                }else{
+                    dp[i][j] = 1+dp[i-1][j];
+                }
+            }
+        }
+        int ans = dp[m][n];
+        for(int j = 0; j<=n; j++){
+            ans = Math.min(dp[m][j], ans);
+        }
+        return ans;
     }
 
     public static void main(String[] args) {
