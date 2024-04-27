@@ -22,6 +22,7 @@ public class ReverseArraySubarrayMaxSum {
 
     }
 
+
     // nums[l...r]范围上的数字进行逆序调整
     public static void reverse(int[] nums, int l, int r) {
         while(l<r){
@@ -106,9 +107,7 @@ public class ReverseArraySubarrayMaxSum {
             int[] arr = randomArray(len, v);
             int ans1 = maxSumReverse1(arr);
             int ans2 = maxSumReverse2(arr);
-            if (ans1 != ans2) {
-                System.out.println("出错了!");
-            }
+
         }
         System.out.println("测试结束");
     }
