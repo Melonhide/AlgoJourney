@@ -12,5 +12,61 @@ package class074;
 // 提交以下的所有代码，并把主类名改成"Main"，可以直接通过
 
 
+import java.io.*;
+import java.util.Arrays;
+
 public class PartitionedKnapsack {
+
+    public static int maxm = 1001;
+    public static int maxn = 1001;
+    public static int[][] arr = new int[maxn][3];
+    public static int m, n;
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StreamTokenizer in = new StreamTokenizer(br);
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+        while(in.nextToken()!=StreamTokenizer.TT_EOF){
+            m = (int)in.nval;
+            in.nextToken();
+            n = (int)in.nval;
+            for(int i = 0; i<n; i++){
+                in.nextToken();
+                arr[i][0] = (int) in.nval;
+                in.nextToken();
+                arr[i][1] = (int) in.nval;
+                in.nextToken();
+                arr[i][2] = (int) in.nval;
+            }
+            out.println(compute1());
+        }
+        out.flush();
+        out.close();
+        br.close();
+    }
+
+    public static int compute1(){
+        Arrays.sort(arr, 0, n, (a,b)->(a[2]-b[2]));
+        int teams = 1;
+        for(int i = 1; i <n; i++){
+            if(arr[i][2]!=arr[i-1][2]){
+                teams++;
+            }
+        }
+        int[][] dp = new int[teams+1][m+1];
+        for(int i = 1, start = 0, end = start+1; i <= teams; i++){
+            while(arr[end][2]==arr[start][2]){
+                end++;
+            }
+            for(int index=start; index<end; index++){
+                for(int j = 0; j<=m; j++){
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j]);
+                    if(j>=arr[index][0]){
+                        dp[i][j] = Math.max(dp[i][j], dp[i-1][j-arr[index][0]]+arr[index][1]);
+                    }
+                }
+            }
+            start = end++;
+        }
+        return dp[teams][m];
+    }
 }
