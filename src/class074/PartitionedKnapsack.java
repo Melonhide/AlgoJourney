@@ -20,6 +20,8 @@ public class PartitionedKnapsack {
     public static int maxm = 1001;
     public static int maxn = 1001;
     public static int[][] arr = new int[maxn][3];
+    public static int[] dp = new int[maxm];
+
     public static int m, n;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -37,7 +39,7 @@ public class PartitionedKnapsack {
                 in.nextToken();
                 arr[i][2] = (int) in.nval;
             }
-            out.println(compute1());
+            out.println(compute2());
         }
         out.flush();
         out.close();
@@ -57,9 +59,18 @@ public class PartitionedKnapsack {
             while(arr[end][2]==arr[start][2]){
                 end++;
             }
-            for(int index=start; index<end; index++){
-                for(int j = 0; j<=m; j++){
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j]);
+//            for(int index=start; index<end; index++){
+//                for(int j = 0; j<=m; j++){
+//                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j]);
+//                    if(j>=arr[index][0]){
+//                        dp[i][j] = Math.max(dp[i][j], dp[i-1][j-arr[index][0]]+arr[index][1]);
+//                    }
+//                }
+//            }
+
+            for(int j = 0; j<=m; j++){
+                dp[i][j] = dp[i-1][j];
+                for(int index = start; index<end; index++){
                     if(j>=arr[index][0]){
                         dp[i][j] = Math.max(dp[i][j], dp[i-1][j-arr[index][0]]+arr[index][1]);
                     }
@@ -68,5 +79,26 @@ public class PartitionedKnapsack {
             start = end++;
         }
         return dp[teams][m];
+    }
+
+
+    public static int compute2(){
+        Arrays.fill(dp, 0, m+1, 0);
+        Arrays.sort(arr, 0, n, (a,b)->(a[2]-b[2]));
+
+        for(int start = 0, end = start+1; start<n;){
+            while(arr[end][2]==arr[start][2]){
+                end++;
+            }
+            for(int j = m; j>=0; j--){
+                for(int index = start; index<end; index++){
+                    if(j>=arr[index][0]){
+                        dp[j] = Math.max(dp[j], dp[j-arr[index][0]]+arr[index][1]);
+                    }
+                }
+            }
+            start = end++;
+        }
+        return dp[m];
     }
 }
