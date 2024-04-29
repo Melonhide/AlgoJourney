@@ -2,6 +2,8 @@ package class073;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
 
 // 非负数组前k个最小的子序列累加和
 // 给定一个数组nums，含有n个数字，都是非负数
@@ -62,6 +64,25 @@ public class TopKMinimumSubsequenceSum {
         return ans;
     }
 
+    public static int[] topKSum3(int[] nums, int k){
+        Arrays.sort(nums);
+        PriorityQueue<int[]> heap = new PriorityQueue<>((a,b)->(a[1]-b[1]));
+
+        int[] ans = new int[k];
+        heap.add(new int[] {0, nums[0]});
+        for(int i = 1, right, cursum; i<k; i++){
+            int[] cur = heap.poll();
+            right = cur[0];
+            cursum = cur[1];
+            ans[i] = cursum;
+            if(right+1<nums.length){
+                heap.add(new int[]{right+1, cursum-nums[right]+nums[right+1]});
+                heap.add(new int[]{right+1, cursum+nums[right+1]});
+            }
+        }
+        return ans;
+    }
+
 
     // 为了测试
     public static int[] randomArray(int len, int value) {
@@ -98,14 +119,12 @@ public class TopKMinimumSubsequenceSum {
             int k = (int) (Math.random() * ((1 << len) - 1)) + 1;
             int[] ans1 = topKSum1(nums, k);
             int[] ans2 = topKSum2(nums, k);
-//            int[] ans3 = topKSum3(nums, k);
-//            if (!equals(ans1, ans2) || !equals(ans1, ans3)) {
-//                System.out.println("出错了！");
-//            }
-
-            if (!equals(ans1, ans2)) {
+            int[] ans3 = topKSum3(nums, k);
+            if (!equals(ans1, ans2) || !equals(ans1, ans3)) {
                 System.out.println("出错了！");
             }
+
+
         }
         System.out.println("测试结束");
     }
