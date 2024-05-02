@@ -1,2 +1,4 @@
-package class075;public class BoundedKnapsackWithBinarySplitting {
+package class075;
+
+public class BoundedKnapsackWithBinarySplitting {
 }
