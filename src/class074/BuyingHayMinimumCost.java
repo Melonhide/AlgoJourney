@@ -12,6 +12,8 @@ public class BuyingHayMinimumCost {
     public static int max;
     public static int[] cost = new int[maxn];
     public static int[] val = new int[maxn];
+
+    public static int[] dp = new int[maxh];
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StreamTokenizer in = new StreamTokenizer(br);
@@ -29,7 +31,7 @@ public class BuyingHayMinimumCost {
                 cost[i] = (int) in.nval;
             }
 
-            out.println(compute());
+            out.println(compute2());
         }
         out.flush();
         out.close();
@@ -57,6 +59,25 @@ public class BuyingHayMinimumCost {
         int ans = Integer.MAX_VALUE;
         for(int i = h; i<dp[0].length; i++){
             ans = Math.min(dp[n][i], ans);
+        }
+        return ans;
+    }
+
+    public static int compute2(){
+        int right = max+h+1;
+        Arrays.fill(dp, 1, right, Integer.MAX_VALUE);
+
+        for(int i = 1; i <=n; i++){
+            for(int j = val[i]; j<right; j++){
+                if(dp[j-val[i]]!=Integer.MAX_VALUE){
+                    dp[j] = Math.min(dp[j], dp[j-val[i]]+cost[i]);
+                }
+            }
+        }
+
+        int ans = Integer.MAX_VALUE;
+        for(int i = h; i<right; i++){
+            ans = Math.min(dp[i], ans);
         }
         return ans;
     }
