@@ -1,12 +1,15 @@
 package class074;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class BuyingHayMinimumCost {
 
     public static int n, h;
     public static int maxn = 101;
-    public static int maxh = 50001;
+    public static int maxh = 55001;
+
+    public static int max;
     public static int[] cost = new int[maxn];
     public static int[] val = new int[maxn];
     public static void main(String[] args) throws IOException{
@@ -17,12 +20,15 @@ public class BuyingHayMinimumCost {
             n = (int) in.nval;
             in.nextToken();
             h = (int) in.nval;
+            max = 0;
             for(int i = 1; i <= n; i++){
                 in.nextToken();
                 val[i] = (int) in.nval;
+                max = Math.max(max, val[i]);
                 in.nextToken();
                 cost[i] = (int) in.nval;
             }
+
             out.println(compute());
         }
         out.flush();
@@ -31,6 +37,27 @@ public class BuyingHayMinimumCost {
     }
 
     public static int compute(){
+        int[][] dp = new int[n+1][h+max+1];
+        for(int i = 0; i <=n; i++){
+            Arrays.fill(dp[i], Integer.MAX_VALUE);
+        }
 
+        dp[0][0] = 0;
+
+        for(int i = 1; i <=n; i++){
+            dp[i][0] = 0;
+            for(int j = 1; j<dp[0].length; j++){
+                dp[i][j] = dp[i-1][j];
+                if(j>=val[i] && dp[i][j-val[i]]!=Integer.MAX_VALUE){
+                    dp[i][j] = Math.min(dp[i][j], dp[i][j-val[i]]+cost[i]);
+                }
+            }
+        }
+
+        int ans = Integer.MAX_VALUE;
+        for(int i = h; i<dp[0].length; i++){
+            ans = Math.min(dp[n][i], ans);
+        }
+        return ans;
     }
 }
