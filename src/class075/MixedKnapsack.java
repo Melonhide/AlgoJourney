@@ -19,13 +19,15 @@ import java.util.Arrays;
 // 请同学们务必参考如下代码中关于输入、输出的处理
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
-public class MixedKnapsack {
+public class MixedKnapsack{
 
     public static int maxn = 101;
+    public static int maxm = 100001;
     public static int[] cnt = new int[maxn];
     public static int[] val = new int[maxn];
-    public static boolean[] dp = new boolean[maxn];
-    public static int n,m;
+    public static boolean[] dp = new boolean[maxm];
+
+    public static int n,m,l,r;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -40,6 +42,9 @@ public class MixedKnapsack {
                 for(int i = 1; i <= n; i++){
                     in.nextToken();
                     val[i] = (int) in.nval;
+                }
+
+                for(int i = 1; i <= n; i++){
                     in.nextToken();
                     cnt[i] = (int) in.nval;
                 }
@@ -56,8 +61,48 @@ public class MixedKnapsack {
         Arrays.fill(dp, 1, m+1, false);
         dp[0] = true;
         for(int i = 1; i<= n; i++){
-            continue;
+            if(cnt[i] == 1){
+                for(int j = m; j>=val[i]; j--){
+                    dp[j]|=dp[j-val[i]];
 
+                }
+            }else if(cnt[i]*val[i]>=m){
+                for(int j = val[i]; j<=m; j++){
+                    dp[j] |= dp[j-val[i]];
+
+                }
+            }else{
+                for(int mod = 0; mod < val[i]; mod++){
+                    int truecnt = 0;
+                    for(int j = m-mod, k = 0; j>=0 && k<=cnt[i]; j -= val[i], k++){
+                        truecnt += dp[j]? 1:0;
+                    }
+                    for(int j = m-mod, l = j-val[i]*(cnt[i]+1); j>=1; j-=val[i],l-=val[i]){
+//                        if(truecnt!=0){
+//                            dp[j] = true;
+//                        }
+//
+//                        if(dp[j]){
+//                            truecnt--;
+//                        }
+//
+//                        if(l>=0){
+//                            truecnt += dp[l]? 1:0;
+//                        }
+
+                        if (dp[j]) {
+                            truecnt--;
+                        } else {
+                            if (truecnt != 0) {
+                                dp[j] = true;
+                            }
+                        }
+                        if (l >= 0) {
+                            truecnt += dp[l] ? 1 : 0;
+                        }
+                    }
+                }
+            }
         }
 
 
