@@ -1,6 +1,7 @@
 package class075;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class BoundedKnapsackWithMonotonicQueue {
     public static int maxn = 101;
@@ -29,7 +30,7 @@ public class BoundedKnapsackWithMonotonicQueue {
                 m[i] = (int) in.nval;
             }
 
-            out.println(compute());
+            out.println(compute2());
         }
         out.flush();
         out.close();
@@ -63,23 +64,35 @@ public class BoundedKnapsackWithMonotonicQueue {
         return tot/w[singleindex] * v[singleindex];
     }
 
-//    public static int compute2(){
-//        Arrays.fill(dp, 0, W+1, 0);
-//        for(int i = 1; i <= n ; i++){
-//            for(int mod = 0; mod<Math.min(w[i], W+1); mod++){
-//                l = 0;
-//                r = 0;
-//                for(int j = W; j>=mod; j-=w[i]){
-//                    while(l!=r &&  dp[queue[r-1]]+diff(j-queue[r-1], i)<=dp[j]){
-//                        r--;
-//                    }
-//                    queue[r++] = j;
-//                    dp[j] = dp[queue[l]] + diff(j-queue[l], i);
-//
-//                }
-//            }
-//        }
-//
-//        return dp[W];
-//    }
+    public static int compute2(){
+        Arrays.fill(dp, 0, W+1, 0);
+        for(int i = 1; i <= n ; i++){
+            for(int mod = 0; mod<Math.min(w[i], W+1); mod++){
+                l = 0;
+                r = 0;
+                for(int j = W-mod, k = 0; j>=0 && k<=m[i]; j-=w[i], k++){
+                    while(l!=r &&  dp[queue[r-1]]<=dp[j]+diff(queue[r-1]-j, i)){
+                        r--;
+                    }
+                    queue[r++] = j;
+                }
+
+                for(int j = W-mod; j>=mod; j-=w[i]){
+                    dp[j] = dp[queue[l]] + diff(j-queue[l], i);
+                    if(queue[l] == j){
+                        l++;
+                    }
+                    int enter = j-(w[i]*(m[i]+1));
+                    if(enter>=0){
+                        while(l!=r && dp[queue[r-1]]<=dp[enter]+diff(queue[r-1]-enter,i)){
+                            r--;
+                        }
+                        queue[r++] = enter;
+                    }
+                }
+            }
+        }
+
+        return dp[W];
+    }
 }
