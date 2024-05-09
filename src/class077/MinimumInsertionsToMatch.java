@@ -1,4 +1,4 @@
-package class076;
+package class077;
 
 public class MinimumInsertionsToMatch {
 }
