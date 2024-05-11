@@ -11,4 +11,11 @@ package class076;
 // 返回最终得出result有多少种不同的逻辑计算顺序
 // 测试链接 : https://leetcode.cn/problems/boolean-evaluation-lcci/
 public class BooleanEvaluation {
+    int countEval(string s, int result) {
+
+    }
+
+    public static void main(String[] args){
+        5
+    }
 }
