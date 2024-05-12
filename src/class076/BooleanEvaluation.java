@@ -11,11 +11,27 @@ package class076;
 // 返回最终得出result有多少种不同的逻辑计算顺序
 // 测试链接 : https://leetcode.cn/problems/boolean-evaluation-lcci/
 public class BooleanEvaluation {
-    int countEval(string s, int result) {
+    public int countEval(String s, int result) {
+        char[] str = s.toCharArray();
 
+
+
+    }
+    public static int[] f(char[] s, int l, int r){
+        int f = 0;
+        int t = 0;
+        if(l == r){
+            if(s[l] == 1){
+                t++;
+            }else{
+                f++;
+            }
+            return new int[] {f, t};
+        }
+        if(s[l+1] == '')
     }
 
     public static void main(String[] args){
-        5
+
     }
 }
