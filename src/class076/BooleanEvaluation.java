@@ -11,27 +11,52 @@ package class076;
 // 返回最终得出result有多少种不同的逻辑计算顺序
 // 测试链接 : https://leetcode.cn/problems/boolean-evaluation-lcci/
 public class BooleanEvaluation {
-    public int countEval(String s, int result) {
+    public static int countEval(String s, int result) {
         char[] str = s.toCharArray();
-
-
-
+        int n = str.length;
+        int[][][] dp = new int[n][n][];
+        return f(str, 0, str.length-1, dp)[result];
     }
-    public static int[] f(char[] s, int l, int r){
+    public static int[] f(char[] s, int l, int r, int[][][] dp){
+        if(dp[l][r]!=null){
+            return dp[l][r];
+        }
+
         int f = 0;
         int t = 0;
         if(l == r){
-            if(s[l] == 1){
+            if(s[l] == '1'){
                 t++;
             }else{
                 f++;
             }
-            return new int[] {f, t};
+            dp[l][r] = new int[] {f, t};
+            return dp[l][r];
         }
-        if(s[l+1] == '')
+        for(int k = l+1, leftt,leftf,rightt,rightf; k < r; k+=2){
+            int[] tmp = f(s, l, k-1, dp);
+            leftt = tmp[1];
+            leftf = tmp[0];
+            tmp = f(s, k+1, r, dp);
+            rightt = tmp[1];
+            rightf = tmp[0];
+            if(s[k] == '&'){
+                t += leftt*rightt;
+                f += leftt*rightf+leftf*rightt+leftf*rightf;
+            }else if(s[k] == '|'){
+                t += leftt*rightt + leftt*rightf + rightt*leftf;
+                f += leftf*rightf;
+            }else{
+                t += leftt*rightf + leftf*rightt;
+                f += leftf*rightf + rightt*leftt;
+            }
+        }
+
+        dp[l][r] = new int[] {f, t};
+        return dp[l][r];
     }
 
     public static void main(String[] args){
-
+        System.out.println(countEval("1^0|0|1", 0));
     }
 }
