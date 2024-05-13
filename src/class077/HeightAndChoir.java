@@ -23,7 +23,7 @@ public class HeightAndChoir {
                 in.nextToken();
                 arr[i] = (int) in.nval;
             }
-            out.println(compute2());
+            out.println(compute3());
         }
         out.flush();
         out.close();
@@ -94,5 +94,39 @@ public class HeightAndChoir {
         }
 
         return (dp[0][n-1][0]+dp[0][n-1][1]) % mod;
+    }
+
+    public static int compute3(){
+        int[][] dp = new int[n][2];
+
+        for(int l = n-2; l>=0; l--){
+            if(arr[l]<arr[l+1]){
+                dp[l+1][0] = 1;
+                dp[l+1][1] = 1;
+            }else{
+                dp[l+1][0] = 0;
+                dp[l+1][1] = 0;
+            }
+            for(int r = l+2, left, right; r<n; r++){
+                left = 0;
+                right = 0;
+                if(arr[l]<arr[l+1]){
+                    left = (left + dp[r][0])%mod;
+                }
+                if(arr[l]<arr[r]){
+                    left = (left + dp[r][1])%mod;
+                }
+
+                if(arr[r]>arr[r-1]){
+                    right = (right + dp[r-1][1])%mod;
+                }
+                if(arr[r]>arr[l]){
+                    right = (right + dp[r-1][0])%mod;
+                }
+                dp[r][0]= left;
+                dp[r][1] = right;
+            }
+        }
+        return (dp[n-1][0]+dp[n-1][1]) % mod;
     }
 }
