@@ -24,6 +24,9 @@ public class CourseSelection1 {
             n = (int) in.nval;
             in.nextToken();
             m = (int) in.nval;
+            for(int i = 0; i < n; i++){
+
+            }
 
         }
     }
