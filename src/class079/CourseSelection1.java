@@ -29,5 +29,6 @@ public class CourseSelection1 {
             }
 
         }
+        out.flush();
     }
 }
