@@ -30,5 +30,7 @@ public class CourseSelection1 {
 
         }
         out.flush();
+        out.close();
+        br.close();
     }
 }
