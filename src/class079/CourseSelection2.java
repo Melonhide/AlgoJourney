@@ -1,5 +1,8 @@
 package class079;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 // 选课
 // 在大学里每个学生，为了达到一定的学分，必须从很多课程里选择一些课程来学习
 // 在课程里有些课程必须在某些课程之前学习，如高等数学总是在其它课程之前学习
@@ -12,5 +15,7 @@ package class079;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class CourseSelection2 {
-    public static void main(String[] args){}
+    public static void main(String[] args){
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    }
 }
