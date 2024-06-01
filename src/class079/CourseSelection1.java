@@ -2,6 +2,7 @@ package class079;
 
 
 import java.io.*;
+import java.util.ArrayList;
 
 // 选课
 // 在大学里每个学生，为了达到一定的学分，必须从很多课程里选择一些课程来学习
@@ -16,6 +17,22 @@ import java.io.*;
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class CourseSelection1 {
     public static int n, m;
+    public static int maxn = 301;
+    public static ArrayList<ArrayList<Integer>> graph;
+
+    static {
+        graph = new ArrayList<>();
+        for(int i = 0; i < maxn; i++){
+            graph.add(new ArrayList<>());
+        }
+    }
+
+    public static void build(int n){
+        for(int i = 0; i<=n; i++){
+            graph.get(i).clear();
+        }
+    }
+
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StreamTokenizer in = new StreamTokenizer(br);
@@ -24,6 +41,7 @@ public class CourseSelection1 {
             n = (int) in.nval;
             in.nextToken();
             m = (int) in.nval;
+            build(n);
             for(int i = 0; i < n; i++){
 
             }
