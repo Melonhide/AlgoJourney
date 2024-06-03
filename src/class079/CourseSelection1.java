@@ -19,6 +19,8 @@ public class CourseSelection1 {
     public static int n, m;
     public static int maxn = 301;
     public static ArrayList<ArrayList<Integer>> graph;
+    public static int[] nums = new int[maxn];
+    public static int[][][] dp = new int[maxn][][];
 
     static {
         graph = new ArrayList<>();
@@ -40,15 +42,63 @@ public class CourseSelection1 {
         while(in.nextToken()!=StreamTokenizer.TT_EOF){
             n = (int) in.nval;
             in.nextToken();
-            m = (int) in.nval;
+            m = (int) in.nval+1;
             build(n);
-            for(int i = 0; i < n; i++){
+            for(int i = 1, pre, score; i <= n; i++){
+                in.nextToken();
+                pre = (int) in.nval;
+                graph.get(pre).add(i);
 
+                in.nextToken();
+                score = (int) in.nval;
+                nums[i] = score;
             }
+            out.println(compute());
 
         }
         out.flush();
         out.close();
         br.close();
+    }
+
+    public static int compute(){
+        for(int i = 0; i <= n; i++){
+            dp[i] = new int[graph.get(i).size()+1][m+1];
+        }
+
+        for(int i = 0; i <= n; i++){
+            for(int j = 0; j < dp[i].length; j++){
+                for(int k = 0; k <= m ; k++){
+                    dp[i][j][k] = -1;
+                }
+            }
+        }
+
+        return f(0,graph.get(0).size(), m);
+    }
+
+    public static int f(int i, int j, int k){
+        if(dp[i][j][k] !=-1){
+            return dp[i][j][k];
+        }
+
+        if(k == 0){
+            dp[i][j][k] = 0;
+            return dp[i][j][k];
+        }
+
+        if(j == 0 || k == 1){
+            dp[i][j][k] = nums[i];
+            return dp[i][j][k];
+        }
+
+        int ans = f(i, j-1, k);
+        int next = graph.get(i).get(j-1);
+        for(int s = 1; s<k; s++){
+            ans = Math.max(ans,f(i, j-1, k-s)+f(next, graph.get(next).size(), s));
+        }
+
+        dp[i][j][k] = ans;
+        return ans;
     }
 }
