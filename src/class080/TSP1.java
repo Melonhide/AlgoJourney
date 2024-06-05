@@ -1,5 +1,7 @@
 package class080;
 
+import java.io.IOException;
+
 // 售货员的难题 - TSP问题
 // 某乡有n个村庄(1<=n<=20)，有一个售货员，他要到各个村庄去售货
 // 各村庄之间的路程s(1<=s<=1000)是已知的
@@ -13,4 +15,7 @@ package class080;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class TSP1 {
+    public static void main(String[] args) throws IOException{
+
+    }
 }
