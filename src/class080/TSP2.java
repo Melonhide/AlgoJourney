@@ -1,9 +1,7 @@
 package class080;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 // 售货员的难题 - TSP问题
 // 某乡有n个村庄(1<=n<=20)，有一个售货员，他要到各个村庄去售货
@@ -20,5 +18,7 @@ import java.io.InputStreamReader;
 public class TSP2 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StreamTokenizer in = new StreamTokenizer(br);
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
     }
 }
