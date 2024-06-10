@@ -20,5 +20,11 @@ public class TSP2 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StreamTokenizer in = new StreamTokenizer(br);
         PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+        while(in.nextToken()!=StreamTokenizer.TT_EOF){
+
+        }
+        out.flush();
+        out.close();
+        br.close();
     }
 }

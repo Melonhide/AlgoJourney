@@ -1,6 +1,6 @@
 package class080;
 
-import java.io.IOException;
+import java.io.*;
 
 // 售货员的难题 - TSP问题
 // 某乡有n个村庄(1<=n<=20)，有一个售货员，他要到各个村庄去售货
@@ -16,6 +16,14 @@ import java.io.IOException;
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class TSP1 {
     public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StreamTokenizer in = new StreamTokenizer(br);
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+        while(in.nextToken()!=StreamTokenizer.TT_EOF){
 
+        }
+        out.flush();
+        out.close();
+        br.close();
     }
 }
