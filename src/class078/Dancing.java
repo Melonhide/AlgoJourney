@@ -1,5 +1,7 @@
 package class078;
 
+import java.io.IOException;
+
 // 没有上司的舞会
 // 某大学有n个职员，编号为1...n
 // 他们之间有从属关系，也就是说他们的关系就像一棵以校长为根的树
@@ -16,4 +18,7 @@ package class078;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class Dancing {
+    public static void main(String[] args) throws IOException{
+
+    }
 }
