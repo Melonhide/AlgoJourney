@@ -16,6 +16,7 @@ import java.util.Arrays;
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class CourseSelection2 {
     public static int maxn = 301;
+    public static int maxm = 301;
 
     public static int[] nums = new int[maxn];
     public static int m, n, edgecnt, dfncnt;
@@ -23,13 +24,17 @@ public class CourseSelection2 {
     public static int[] next = new int[maxn];
     public static int[] to = new int[maxn];
 
+    // 下标为dfn序号
     public static int[] val = new int[maxn+1];
     public static int[] size = new int[maxn+1];
 
+    public static int[][] dp = new int[maxn+2][maxn];
+
     public static void build(){
-        edgecnt = 0;
+        edgecnt = 1;
         dfncnt = 0;
         Arrays.fill(head, 0, n+1, 0);
+        Arrays.fill(dp[n+2], 0, n+1, 0);
     }
 
     public static void addedge(int u, int v){
@@ -61,10 +66,25 @@ public class CourseSelection2 {
     }
 
     public static int compute(){
+        f(0);
 
+        for(int i = n+1; i >= 2; i--){
+            for(int j = 1; j<=m; j++){
+                dp[i][j] = Math.max(dp[i+size[i]][j], dp[i+1][j-1]+val[i]);
+            }
+        }
+
+        return dp[2][m];
     }
 
-    public static int f(){
-
+    public static int f(int u){
+        int i = ++dfncnt;
+        val[i] = nums[u];
+        size[i] = 1;
+        for(int ei = head[u], v; ei>0; ei = next[ei]){
+            v = to[ei];
+            size[i] += f(v);
+        }
+        return size[i];
     }
 }
