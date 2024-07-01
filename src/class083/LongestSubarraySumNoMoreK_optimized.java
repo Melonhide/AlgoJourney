@@ -2,7 +2,7 @@ package class083;
 
 import java.io.*;
 
-public class LongestSubarrySumNoMoreK_optimized {
+public class LongestSubarraySumNoMoreK_optimized {
     public static int maxn = 100001;
     public static int[] nums = new int[maxn];
     public static int[] minSums = new int[maxn];
