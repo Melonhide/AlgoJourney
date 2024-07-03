@@ -12,6 +12,7 @@ import java.io.*;
 
 public class WindyNumber {
     public static int a, b;
+    public static int[][][] dp = new int [11][11][2];
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StreamTokenizer in = new StreamTokenizer(br);
@@ -28,11 +29,25 @@ public class WindyNumber {
         br.close();
     }
 
+
+    public static void build(){
+        for(int i = 0; i < 11; i++){
+            for(int j = 0; j < 11; j++){
+                dp[i][j][0] = -1;
+                dp[i][j][1] = -1;
+            }
+        }
+    }
+
     public static int compute(){
         return cnt(b) - cnt(a-1);
     }
 
     public static int cnt(int n){
+        if(n == 0){
+            return 1;
+        }
+
         int tmp = n/10;
         int len = 1;
         int offset = 1;
@@ -41,13 +56,19 @@ public class WindyNumber {
             len++;
             offset *= 10;
         }
+        build();
 
         return f(n, len, offset, 0, 10);
     }
 
     public static int f(int n, int len, int offset, int free, int pre){
         if(len == 0){
+            dp[len][pre][free] = 1;
             return 1;
+        }
+
+        if(dp[len][pre][free] != -1){
+            return dp[len][pre][free];
         }
 
         int cur = (n/offset % 10);
@@ -82,6 +103,8 @@ public class WindyNumber {
                 }
             }
         }
+
+        dp[len][pre][free] = ans;
         return ans;
     }
 }
