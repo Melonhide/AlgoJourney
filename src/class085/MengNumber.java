@@ -1,5 +1,7 @@
 package class085;
 
+import java.io.IOException;
+
 // 萌数
 // 如果一个数字，存在长度至少为2的回文子串，那么这种数字被称为萌数
 // 比如101、110、111、1234321、45568
@@ -10,4 +12,7 @@ package class085;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class MengNumber {
+    public static void main(String[] args) throws IOException{
+
+    }
 }
