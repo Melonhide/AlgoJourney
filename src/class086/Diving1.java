@@ -41,24 +41,50 @@ public class Diving1 {
                 in.nextToken();
                 nums[i][2] = (int) in.nval;
             }
-            out.println(compute());
+            compute();
+            out.println(dp[0][0][0]);
+            out.println(path[0][0][0]);
         }
         out.flush();
         out.close();
         br.close();
     }
 
-    public static int compute(){
-       for(int i = n-1, ans; i>=0; i--){
+    public static void build(){
+        for(int i = 0; i <= n; i++){
+            for(int j = 0; j<=m; j++){
+                for(int k = 0; k<=v; k++){
+                    dp[i][j][k] = 0;
+                    path[i][j][k] = null;
+                }
+            }
+        }
+    }
+
+    public static void compute(){
+        build();
+        for(int i = n-1; i>=0; i--){
            for(int j = m; j >=0; j--){
-               for(int k = v; k>=0; k--){
+               for(int k = v, ans2; k>=0; k--){
                    dp[i][j][k] = dp[i+1][j][k];
+                   path[i][j][k] = path[i+1][j][k];
                    if(nums[i][0]+j<=m && nums[i][1]+k<=v){
-                       dp[i][j][k] = Math.max(dp[i][j][k], nums[i][2]+dp[i+1][nums[i][0]+j][nums[i][1]+k]);
+                       ans2 = nums[i][2]+dp[i+1][nums[i][0]+j][nums[i][1]+k];
+                       String path2;
+                       if(path[i+1][nums[i][0]+j][nums[i][1]+k]==null){
+                           path2 = String.valueOf(i+1);
+                       }else{
+                           path2 = String.valueOf(i+1) + " " + path[i+1][nums[i][0]+j][nums[i][1]+k];
+                       }
+                       if(ans2 > dp[i][j][k]){
+                           dp[i][j][k] = ans2;
+                           path[i][j][k] = path2;
+                       }else if(ans2 == dp[i][j][k]){
+                           path[i][j][k] = path2.compareTo(path[i][j][k]) < 0? path2:path[i][j][k];
+                       }
                    }
                }
            }
        }
-       return dp[0][0][0];
     }
 }
