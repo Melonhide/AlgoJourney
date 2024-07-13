@@ -13,5 +13,32 @@ package class087;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 
+import java.io.*;
+
 public class BuyMonster {
+    public static int n;
+    public static int[] a;
+    public static int[] b;
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StreamTokenizer in = new StreamTokenizer(br);
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+        while(in.nextToken()!=StreamTokenizer.TT_EOF){
+            n = (int) in.nval;
+            a = new int[n+1];
+            b = new int[n+1];
+
+            for(int i = 0; i<n; i++){
+                in.nextToken();
+                a[i] = (int) in.nval;
+                in.nextToken();
+                b[i] = (int) in.nval;
+            }
+            out.println(compute());
+        }
+    }
+
+    public static int compute(){
+
+    }
 }
