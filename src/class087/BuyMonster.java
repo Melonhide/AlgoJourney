@@ -34,11 +34,53 @@ public class BuyMonster {
                 in.nextToken();
                 b[i] = (int) in.nval;
             }
-            out.println(compute());
+            out.println(compute2_enhance());
         }
+        out.flush();
+        out.close();
+        br.close();
     }
 
-    public static int compute(){
+    // 假设a[i]数值的范围很大，但是b[i]数值的范围不大
+//    public static int compute1(){
+//        pass;
+//    }
 
+    // 假设a[i]数值的范围不大，但是b[i]数值的范围很大
+    public static int compute2(){
+        int m = 0;
+        for(int i:a){
+            m += i;
+        }
+
+        int[][] dp = new int[n+1][m+1];
+        for(int i = n-1; i>=0; i--){
+            for(int j = 0; j<=m-a[i]; j++){
+                dp[i][j] = b[i] + dp[i+1][j+a[i]];
+                if(j>=a[i]){
+                    dp[i][j] = Math.min(dp[i][j], dp[i+1][j]);
+                }
+            }
+        }
+        return dp[0][0];
+    }
+
+    public static int compute2_enhance(){
+        int m = 0;
+        for(int i:a){
+            m += i;
+        }
+
+        int[] dp = new int[m+1];
+        for(int i = n-1; i>=0; i--){
+            for(int j = 0, tmp; j<=m-a[i]; j++){
+                tmp = dp[j];
+                dp[j] = b[i] + dp[j+a[i]];
+                if(j>=a[i]){
+                    dp[j] = Math.min(dp[j], tmp);
+                }
+            }
+        }
+        return dp[0];
     }
 }
