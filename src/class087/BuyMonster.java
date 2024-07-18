@@ -42,9 +42,7 @@ public class BuyMonster {
     }
 
     // 假设a[i]数值的范围很大，但是b[i]数值的范围不大
-//    public static int compute1(){
-//        pass;
-//    }
+
 
     // 假设a[i]数值的范围不大，但是b[i]数值的范围很大
     public static int compute2(){
@@ -82,5 +80,22 @@ public class BuyMonster {
             }
         }
         return dp[0];
+    }
+
+    public static int compute3(){
+        int m = 0;
+        for(int i:a){
+            m += i;
+        }
+
+        int[][] dp = new int[n+1][m+1];
+        for(int i = 0; i <= n; i++){
+            for(int j = 0; j <= m; j++){
+                if(j<=a[i]){
+                    dp[i][j] = Integer.MAX_VALUE;
+                }
+
+            }
+        }
     }
 }
