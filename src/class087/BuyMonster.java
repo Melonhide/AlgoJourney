@@ -17,7 +17,9 @@ import java.io.*;
 
 public class BuyMonster {
     public static int n;
+    // a代表怪物的力量
     public static int[] a;
+    // b代表怪物需要的钱
     public static int[] b;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -34,7 +36,7 @@ public class BuyMonster {
                 in.nextToken();
                 b[i] = (int) in.nval;
             }
-            out.println(compute2_enhance());
+            out.println(compute1_enhance());
         }
         out.flush();
         out.close();
@@ -42,12 +44,82 @@ public class BuyMonster {
     }
 
     // 假设a[i]数值的范围很大，但是b[i]数值的范围不大
+    // dp表就应该代表，在特定金钱限制下，获得的最大能力
+    public static int compute_recursion(){
+        int m = 0;
+        for(int i: b){
+            m += i;
+        }
+
+        int ans = -1;
+        for(int i = 0; i <= m; i++){
+            if(f(n-1, i) != Integer.MIN_VALUE){
+                ans = i;
+                break;
+            }
+        }
+
+        return ans;
+    }
+
+    public static int f(int i, int curMoney){
+        if(i == 0){
+            return curMoney == b[i]? a[i]:Integer.MIN_VALUE;
+        }
+
+        int ans = Integer.MIN_VALUE;
+        if(f(i-1, curMoney)>=a[i]){
+            ans = f(i-1, curMoney);
+        }
+
+        if(curMoney>=b[i] && f(i-1, curMoney-b[i]) != Integer.MIN_VALUE){
+            ans = Math.max(ans, f(i-1, curMoney-b[i]) + a[i]);
+        }
+
+        return ans;
+    }
+
+    public static int compute1_enhance(){
+        int m = 0;
+        for(int i: b){
+            m += i;
+        }
+
+        int[] dp = new int[m+1];
+        for(int i = 0; i<=m; i++){
+            dp[i] = i==b[0]? a[0]:Integer.MIN_VALUE;
+        }
+        for(int i = 1; i < n; i++){
+            for(int j = m, ans; j >= 0; j--){
+                ans = Integer.MIN_VALUE;
+                if(dp[j]>=a[i]){
+                    ans = dp[j];
+                }
+
+                if(j>=b[i] && dp[j-b[i]]!=Integer.MIN_VALUE){
+                    ans = Math.max(ans, dp[j-b[i]]+a[i]);
+                }
+                dp[j] = ans;
+            }
+        }
+
+        int ans = -1;
+        for(int i = 0; i <= m; i++){
+            if(dp[i] != Integer.MIN_VALUE){
+                ans = i;
+                break;
+            }
+        }
+
+        return ans;
+    }
 
 
     // 假设a[i]数值的范围不大，但是b[i]数值的范围很大
+    // 那么dp表就应该代表，为了获得特定能力，需要的最小金钱
     public static int compute2(){
         int m = 0;
-        for(int i:a){
+        for (int i : a) {
             m += i;
         }
 
@@ -82,20 +154,39 @@ public class BuyMonster {
         return dp[0];
     }
 
-    public static int compute3(){
+    //
+    public static int compute2_recursion(){
         int m = 0;
         for(int i:a){
             m += i;
         }
-
         int[][] dp = new int[n+1][m+1];
+
         for(int i = 0; i <= n; i++){
             for(int j = 0; j <= m; j++){
-                if(j<=a[i]){
-                    dp[i][j] = Integer.MAX_VALUE;
-                }
-
+                dp[i][j] = -1;
             }
         }
+
+        return f2(0,0, dp);
     }
+
+    public static int f2(int i, int curPower, int[][] dp){
+        if(dp[i][curPower] != -1){
+            return dp[i][curPower];
+        }
+
+        if(i == n){
+            dp[i][curPower] = 0;
+            return 0;
+        }
+
+        int ans = f2(i+1, curPower+a[i], dp)+b[i];
+        if(curPower>=a[i]){
+            ans = Math.min(ans, f2(i+1, curPower, dp));
+        }
+        dp[i][curPower] = ans;
+        return ans;
+    }
+
 }
