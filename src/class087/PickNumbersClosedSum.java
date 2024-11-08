@@ -10,4 +10,22 @@ package class087;
 // 1 <= k <= n
 // 来自真实大厂笔试，没有测试链接，用对数器验证
 public class PickNumbersClosedSum {
+    public static int[] pick(int n, int k){
+        long target = (1+n)*n/2;
+        int sumMin = 0;
+        int sumMax = 0;
+        for(int i = 1, j = n; i <= k; i++, j--){
+            sumMin += i;
+            sumMax += j;
+        }
+
+        if(sumMin>target||sumMax<target){
+            return new int[0];
+        }
+    }
+
+    public static int[] generate(long sum, int n, int k){
+
+    }
+
 }
