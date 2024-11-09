@@ -28,4 +28,19 @@ public class PickNumbersClosedSum {
 
     }
 
+
+    public static void main(String[] args) {
+        int N = 60;
+        int testTime = 5000;
+        System.out.println("测试开始");
+        for (int i = 0; i < testTime; i++) {
+            int n = (int) (Math.random() * N) + 2;
+            int k = (int) (Math.random() * n) + 1;
+            int[] ans = pick(n, k);
+            if (!pass(n, k, ans)) {
+                System.out.println("出错了!");
+            }
+        }
+        System.out.println("测试结束");
+    }
 }
