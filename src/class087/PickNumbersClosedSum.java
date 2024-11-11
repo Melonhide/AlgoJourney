@@ -31,20 +31,19 @@ public class PickNumbersClosedSum {
         long cur = (1+k)*k/2;
         long need = sum-cur;
         int[] ans = new int[k];
-        for(int i = 1; i <= k; i++){
-            ans[i-1] = i;
-        }
-        int move =(int) need/range;
-        int left =(int) need % range;
-        int ind = 0;
-        while(move != 0){
-            ans[ind++] += range;
-            move--;
-        }
-        if(left != 0){
-            ans[ind] += left;
+        int rightsize = k-1-(int)need/range;
+        int i = 0;
+        for(; i < rightsize; i++){
+            ans[i] = i+1;
         }
 
+        for(; i<k; i++){
+            ans[i] = i+1+range;
+        }
+
+        if(need%range != 0){
+            ans[rightsize-1]  += (int)need%range;
+        }
         return ans;
     }
 
