@@ -1,5 +1,7 @@
 package class091;
 
+import java.util.PriorityQueue;
+
 // 组团买票
 // 景区里一共有m个项目，景区的第i个项目有如下两个参数：
 // game[i] = { Ki, Bi }，Ki、Bi一定是正数
@@ -21,18 +23,116 @@ package class091;
 // 1 <= M、N、Ki、Bi <= 10^5
 // 来自真实大厂笔试，没有在线测试，对数器验证
 public class GroupBuyTickets {
+
+    // Self method
+    public static int enough1(int n, int[][] games){
+        int m = games.length;
+        int[] cnt = new int[m];
+        return f1(0,n,games, cnt);
+    }
+
+    public static int f1(int i, int n, int[][] games, int[] cnt){
+        if(i == n){
+           return 0;
+        }
+        int ans = f1(i+1, n, games, cnt);
+        for(int j = 0; j < games.length; j++){
+            cnt[j]++;
+            ans = Math.max(ans, games[j][1]-cnt[j]*games[j][0]-(cnt[j]-1)*games[j][0] +  f1(i+1, n, games, cnt));
+            cnt[j]--;
+        }
+        return ans;
+    }
+
+    // Zuo method
+    public static int enough3(int n, int[][] games) {
+        int m = games.length;
+        int[] cnts = new int[m];
+        return f(0, n, m, games, cnts);
+    }
+
+    public static int f(int i, int n, int m, int[][] games, int[] cnts) {
+        if (i == n) {
+            int ans = 0;
+            for (int j = 0, k, b, x; j < m; j++) {
+                k = games[j][0];
+                b = games[j][1];
+                x = cnts[j];
+                ans += Math.max((b - k * x) * x, 0);
+            }
+            return ans;
+        } else {
+            int ans = f(i + 1, n, m, games, cnts);
+            for (int j = 0; j < m; j++) {
+                cnts[j]++;
+                ans = Math.max(ans, f(i + 1, n, m, games, cnts));
+                cnts[j]--;
+            }
+            return ans;
+        }
+    }
+
+
+    public static int enough2(int n, int[][] games){
+        PriorityQueue<Game> heap = new PriorityQueue<>((Game a, Game b)->(b.earn()-a.earn()));
+        for(int[] game:games){
+            heap.add(new Game(game[0], game[1]));
+        }
+        int ans = 0;
+        for(int i = 0; i < n; i++){
+            Game cur = heap.poll();
+            if(cur.earn()<=0){
+                break;
+            }
+            ans+= cur.earn();
+            cur.cnt++;
+            heap.add(cur);
+        }
+        return ans;
+    }
     public static class Game{
-        public static int ki;
-        public static int bi;
-        public static int cnt;
+        public int ki;
+        public int bi;
+        public int cnt;
         public Game(int k, int b){
             ki = k;
             bi = b;
             cnt = 0;
         }
-        public static int earn(){
+        public int earn(){
             return bi-(cnt+1)*ki - cnt*ki;
         }
+    }
+    public static int[][] randomGames(int m, int v) {
+        int[][] ans = new int[m][2];
+        for (int i = 0; i < m; i++) {
+            ans[i][0] = (int) (Math.random() * v) + 1;
+            ans[i][1] = (int) (Math.random() * v) + 1;
+        }
+        return ans;
+    }
+
+    // 为了验证
+    public static void main(String[] args) {
+        int N = 8;
+        int M = 8;
+        int V = 20;
+        int testTimes = 2000;
+        System.out.println("测试开始");
+        for (int i = 1; i <= testTimes; i++) {
+            int n = (int) (Math.random() * N) + 1;
+            int m = (int) (Math.random() * M) + 1;
+            int[][] games = randomGames(m, V);
+            int ans1 = enough1(n, games);
+            int ans2 = enough3(n, games);
+            if (ans1 != ans2) {
+                System.out.println("出错了！");
+            }
+            if (i % 100 == 0) {
+                System.out.println("测试到第" + i + "组");
+            }
+        }
+        System.out.println("测试结束");
     }
 
 
