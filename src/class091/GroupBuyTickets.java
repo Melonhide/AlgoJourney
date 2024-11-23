@@ -22,7 +22,19 @@ package class091;
 // 来自真实大厂笔试，没有在线测试，对数器验证
 public class GroupBuyTickets {
     public static class Game{
-
+        public static int ki;
+        public static int bi;
+        public static int cnt;
+        public Game(int k, int b){
+            ki = k;
+            bi = b;
+            cnt = 0;
+        }
+        public static int earn(){
+            return bi-(cnt+1)*ki - cnt*ki;
+        }
     }
+
+
 
 }
