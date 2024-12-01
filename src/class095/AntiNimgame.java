@@ -1,5 +1,7 @@
 package class095;
 
+import java.io.IOException;
+
 // 反尼姆博弈(反常游戏)
 // 一共有n堆石头，两人轮流进行游戏
 // 在每个玩家的回合中，玩家需要选择任何一个非空的石头堆，并从这堆石头中移除任意正数的石头数量
@@ -11,4 +13,8 @@ package class095;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class AntiNimgame {
+
+    public static void main(String[] args) throws IOException{
+
+    }
 }
