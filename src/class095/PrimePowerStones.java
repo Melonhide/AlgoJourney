@@ -1,5 +1,7 @@
 package class095;
 
+import java.io.*;
+
 // 质数次方版取石子(巴什博弈扩展)
 // 一共有n颗石子，两个人轮流拿
 // 每一轮当前选手可以拿 p的k次方 颗石子
@@ -13,5 +15,27 @@ package class095;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class PrimePowerStones {
+    public static int n, m;
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StreamTokenizer in = new StreamTokenizer(br);
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+        while(in.nextToken() != StreamTokenizer.TT_EOF){
+            n = (int) in.nval;
+            in.nextToken();
+            for(int i = 0; i < n; i++){
+                m = (int) in.nval;
+                out.println(compute(m));
+                in.nextToken();
+            }
+        }
+        out.flush();
+        out.close();
+        br.close();
+    }
+
+    public static String compute(int m){
+        return m%6 == 0? "Roy wins!":"October wins!";
+    }
 
 }
