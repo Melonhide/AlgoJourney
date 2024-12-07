@@ -12,12 +12,60 @@ package class095;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class FibonacciGame {
+    public static long maxn = 1000000000000001L;
+    public static int maxm = 101;
+    public static long[] nums = new long[maxm];
+    public static int size;
+    public static void build(){
+        nums[0] = 1;
+        nums[1] = 2;
+        size = 1;
+        for(; nums[size]<maxn; size++){
+            nums[size+1] = nums[size-1]+nums[size];
+        }
+    }
+
     public static void main(String[] args) throws IOException{
+        build();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StreamTokenizer in = new StreamTokenizer(br);
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+        while(in.nextToken()!=StreamTokenizer.TT_EOF){
+            out.println(compute((long) in.nval));
+            in.nextToken();
+        }
+        out.flush();
+        out.close();
+        br.close();
+    }
+
+    public static long compute(long n){
+        long find = bs(n);
+        while(find != n){
+            n -= find;
+            find = bs(n);
+        }
+        return find;
+    }
+
+    public static long bs(long n){
+        int l = 0;
+        int r = size;
+        long ans = -1;
+        while(l<=r){
+            int mid = l + ((r-l)>>1);
+            //int mid =(l+r)/2;
+            if(nums[mid]<=n){
+                ans = nums[mid];
+                l = mid+1;
+            }else{
+                r = mid-1;
+            }
+        }
+
+        return ans;
     }
 }
