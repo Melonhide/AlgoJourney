@@ -12,10 +12,12 @@ package class095;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class FibonacciGame {
     public static void main(String[] args) throws IOException{
-
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     }
 }
