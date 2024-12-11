@@ -14,39 +14,26 @@ public class TwoStonesBashGame {
 
     public static String[][][] dp = new String[MAXN][MAXN][MAXN];
 
-    // 动态规划方法彻底尝试
-    // 为了验证
     public static String win1(int a, int b, int m) {
-        if (m >= Math.max(a, b)) {
-            return a != b ? "先手" : "后手";
+        if(a == 0 && b == 0){
+            return "Last";
         }
-        if (a == b) {
-            return "后手";
-        }
-        if (dp[a][b][m] != null) {
+        if(dp[a][b][m] != null){
             return dp[a][b][m];
         }
-        String ans = "后手";
-        for (int pick = 1; pick <= Math.min(a, m); pick++) {
-            if (win1(a - pick, b, m).equals("后手")) {
-                // 后续过程的赢家是后续过程的后手
-                // 那就表示此时的先手，通过这个后续过程，能赢
-                ans = "先手";
-            }
-            if (ans.equals("先手")) {
-                // 后续过程的赢家是后续过程的后手
-                // 那就表示此时的先手，通过这个后续过程，能赢
+        String ans = "Last";
+        for(int i = 1; i <= m && a-i>=0; i++){
+            if(win1(a-i, b, m).equals("Last")){
+                ans = "First";
                 break;
             }
         }
-        for (int pick = 1; pick <= Math.min(b, m); pick++) {
-            if (win1(a, b - pick, m).equals("后手")) {
-                // 后续过程的赢家是后续过程的后手
-                // 那就表示此时的先手，通过这个后续过程，能赢
-                ans = "先手";
-            }
-            if (ans.equals("先手")) {
-                break;
+        if(!ans.equals("First")){
+            for(int i = 1; i <= m && b-i>=0; i++){
+                if(win1(a, b-i, m).equals("Last")){
+                    ans = "First";
+                    break;
+                }
             }
         }
         dp[a][b][m] = ans;
