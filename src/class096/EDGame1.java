@@ -9,4 +9,18 @@ package class096;
 // 计算sg[a][b]的值并找到简洁规律
 // 本文件仅为题目5打表找规律的代码
 public class EDGame1 {
+    public static int maxn = 1001;
+
+    public static int[][] dp = new int[maxn][maxn];
+    public static void build(){
+        for(int i = 0; i < maxn; i++){
+            for(int j = 0; j < maxn; j++){
+                dp[i][j] = -1;
+            }
+        }
+    }
+
+    public static ing sg(int a, int b){
+
+    }
 }
