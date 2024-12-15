@@ -1,6 +1,8 @@
 package class096;
 
 
+import java.io.IOException;
+
 // E&D游戏
 // 桌子上有2n堆石子，编号为1、2、3...2n
 // 其中1、2为一组；3、4为一组；5、6为一组...2n-1、2n为一组
@@ -16,7 +18,7 @@ package class096;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class EDGame2 {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
 
     }
 }
