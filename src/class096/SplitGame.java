@@ -1,4 +1,8 @@
 package class096;
+
+import java.io.*;
+import java.util.Arrays;
+
 // 分裂游戏
 // 一共有n个瓶子，编号为0 ~ n-1，第i瓶里装有nums[i]个糖豆，每个糖豆认为无差别
 // 有两个玩家轮流取糖豆，每一轮的玩家必须选i、j、k三个编号，并且满足i < j <= k
@@ -17,7 +21,83 @@ package class096;
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 public class SplitGame {
 
-    public static void main(String[] args){
+    public static int t, n;
+    public static int[] sg = new int[22];
+    public static int[] nums = new int[22];
+    public static boolean[] seen = new boolean[101];
+    public static void build(){
+        for(int i = 1; i <= 21; i++){
+            Arrays.fill(seen, false);
+            for(int j = i-1; j >= 0; j--){
+                for(int k = j; k>=0; k--){
+                    seen[sg[j]^sg[k]] = true;
+                }
+            }
 
+            for(int s = 0; s < 101; s++){
+                if(!seen[s]){
+                    sg[i] = s;
+                    break;
+                }
+            }
+        }
+    }
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StreamTokenizer in = new StreamTokenizer(br);
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+        while(in.nextToken() != StreamTokenizer.TT_EOF){
+            t = (int) in.nval;
+            in.nextToken();
+            build();
+            for(int j = 0; j < t; j++){
+                n = (int) in.nval;
+                in.nextToken();
+                for(int i = n-1; i >=0; i--){
+                    nums[i] = (int) in.nval;
+                    in.nextToken();
+                }
+                out.println(compute());
+            }
+        }
+        out.flush();
+        out.close();
+        br.close();
+    }
+
+    public static String compute(){
+        int eor = 0;
+        for(int i = n-1; i >= 0; i--){
+            if(nums[i]%2!=0){
+                eor ^= sg[i];
+            }
+        }
+
+        if(eor == 0){
+            return "-1 -1 -1\n0";
+        }
+
+        int cnt = 0, a = -1, b = -1, c = -1, pos;
+        for(int i = n-1; i >= 1; i--){
+            if(nums[i] > 0){
+                for(int j = i-1; j >= 0; j--){
+                    for(int k = j; k>=0; k--){
+                        pos = eor^sg[i]^sg[j]^sg[k];
+                        if(pos == 0){
+                            cnt++;
+                            if(a==-1){
+                                a = i;
+                                b = j;
+                                c = k;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        a = n-1-a;
+        b = n-1-b;
+        c = n-1-c;
+        return String.valueOf(a)+" "+String.valueOf(b)+" "+String.valueOf(c)+"\n"+String.valueOf(cnt);
     }
 }
