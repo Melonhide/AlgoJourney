@@ -1,4 +1,7 @@
 package class097;
+
+import java.io.IOException;
+
 // 判断较大的数字是否是质数(Miller-Rabin测试)
 // 测试链接 : https://www.luogu.com.cn/problem/U148828
 // 请同学们务必参考如下代码中关于输入、输出的处理
@@ -8,4 +11,8 @@ package class097;
 // 为什么不自己写，为什么要用BigInteger中的isProbablePrime方法
 // 原因在于long类型位数不够，乘法同余的时候会溢出，课上已经做了说明
 public class LargeNumberIsPrime2 {
+
+    public static void main(String[] args) throws IOException {
+
+    }
 }
