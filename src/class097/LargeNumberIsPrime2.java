@@ -12,13 +12,14 @@ import java.math.BigInteger;
 // 为什么不自己写，为什么要用BigInteger中的isProbablePrime方法
 // 原因在于long类型位数不够，乘法同余的时候会溢出，课上已经做了说明
 public class LargeNumberIsPrime2 {
+    public static int s = 10;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
         int t = Integer.valueOf(br.readLine());
         for(int i = 0; i < t; i++){
             BigInteger n = new BigInteger(br.readLine());
-            out.println(n.isProbablePrime()? "Yes":"No");
+            out.println(n.isProbablePrime(s)? "Yes":"No");
         }
         out.flush();
         out.close();
