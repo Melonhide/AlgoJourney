@@ -23,7 +23,27 @@ public class EhrlichAndEuler {
     }
 
     public static int euler(int n) {
+        int cnt = 0;
+        int[] primes = new int[n/2+1];
+        boolean[] visited = new boolean[n];
+        for(int i = 2; i < n; i++){
+            if(!visited[i]){
+                primes[cnt++] = i;
+            }
 
+            for(int j = 0; j<cnt; j++){
+                if(i*primes[j]>=n){
+                    break;
+                }
+
+                visited[i*primes[j]] = true;
+                if(primes[j]%i == 0){
+                    break;
+                }
+            }
+        }
+
+        return cnt;
     }
 
 
