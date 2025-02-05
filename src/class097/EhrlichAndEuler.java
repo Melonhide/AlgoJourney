@@ -46,5 +46,25 @@ public class EhrlichAndEuler {
         return cnt;
     }
 
+    public static int ehrlich2(int n){
+        if(n<=2){
+            return 0;
+        }
 
+        boolean[] visited = new boolean[n];
+        int cnt = n/2;
+        for(int i = 3; i*i < n; i+=2){
+            if(!visited[i]){
+                for(int j = i*i; j<n; j+=2*i){
+                    if(!visited[j]){
+                        visited[j] = true;
+                        cnt--;
+                    }
+
+                }
+            }
+        }
+
+        return cnt;
+    }
 }
