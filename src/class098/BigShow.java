@@ -7,6 +7,13 @@ public class BigShow {
         f1();
         System.out.println("矩阵乘法展示结束");
         System.out.println();
+
+        System.out.println("f2() : ");
+        System.out.println("矩阵快速幂展示开始");
+        f2();
+        System.out.println("矩阵快速幂展示结束");
+        System.out.println();
+
     }
 
     public static int[][] multiply(int[][] a, int[][] b){
@@ -26,10 +33,21 @@ public class BigShow {
     }
 
     public static int[][] power(int[][] m, int p){
-        int[][] res;
+        int n = m.length;
+        int[][] ans = new int[n][n];
+        for(int j = 0; j < n; j++){
+            ans[j][j] = 1;
+        }
 
+        while(p>0){
+            if((p&1) == 1){
+                ans = multiply(ans, m);
+            }
+            m = multiply(m, m);
+            p>>=1;
+        }
 
-        return res;
+        return ans;
     }
 
     // 打印二维矩阵
@@ -90,5 +108,17 @@ public class BigShow {
         // 3  1  2  14 12  0
         int[][] ans4 = multiply(g, h);
         print(ans4);
+    }
+
+    // 矩阵快速幂用法的展示
+    public static void f2() {
+        // 只有正方形矩阵可以求幂
+        int[][] a = { { 1, 2 }, { 3, 4 } };
+        // 连乘得到矩阵a的5次方
+        int[][] b = multiply(a, multiply(a, multiply(a, multiply(a, a))));
+        print(b);
+        System.out.println("======");
+        // 矩阵快速幂得到矩阵a的5次方
+        print(power(a, 5));
     }
 }
