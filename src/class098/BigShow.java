@@ -14,6 +14,21 @@ public class BigShow {
         System.out.println("矩阵快速幂展示结束");
         System.out.println();
 
+        System.out.println("f3() : ");
+        System.out.println("求斐波那契数列第n项");
+        System.out.println("用矩阵乘法解决");
+        System.out.println("展示开始");
+        f3();
+        System.out.println("展示结束");
+        System.out.println();
+
+        System.out.println("f4() : ");
+        System.out.println("求斐波那契数列第n项");
+        System.out.println("用矩阵快速幂解决");
+        System.out.println("展示开始");
+        f4();
+        System.out.println("展示结束");
+        System.out.println();
     }
 
     public static int[][] multiply(int[][] a, int[][] b){
@@ -121,4 +136,61 @@ public class BigShow {
         // 矩阵快速幂得到矩阵a的5次方
         print(power(a, 5));
     }
+
+    public static void f3(){
+        int[][] m = {{1,1}, {1,0}};
+        int[][] start = {{1,0}};
+
+        int[][] a = multiply(start, m);
+        //       1  1
+        //       1  0
+        //
+        // 1  0  1  1
+        print(a);
+        System.out.println("======");
+        int[][] b = multiply(a, m);
+        //       1  1
+        //       1  0
+        //
+        // 1  1  2  1
+        print(b);
+        System.out.println("======");
+        int[][] c = multiply(b, m);
+        //       1  1
+        //       1  0
+        //
+        // 2  1  3  2
+        print(c);
+        System.out.println("======");
+        int[][] d = multiply(c, m);
+        //       1  1
+        //       1  0
+        //
+        // 3  2  5  3
+        print(d);
+    }
+
+    public static void f4(){
+        // 0  1  1  2  3  5  8 13 21 34...
+        // 0  1  2  3  4  5  6  7  8  9
+
+        int[][] start = { { 1, 0 } };
+        int[][] m = {
+                { 1, 1 },
+                { 1, 0 }
+        };
+
+        int[][] a = multiply(start, power(m, 1));
+        print(a);
+        System.out.println("======");
+        int[][] b = multiply(start, power(m, 2));
+        print(b);
+        System.out.println("======");
+        int[][] c = multiply(start, power(m, 3));
+        print(c);
+        System.out.println("======");
+        int[][] d = multiply(start, power(m, 4));
+        print(d);
+    }
+
 }
