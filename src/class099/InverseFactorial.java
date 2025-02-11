@@ -6,7 +6,5 @@ package class099;
 // 对数器验证
 public class InverseFactorial {
 
-    public static void main(String[] args) {
 
-    }
 }
