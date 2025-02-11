@@ -5,4 +5,8 @@ package class099;
 // 0 <= m <= n <= 1000
 // 对数器验证
 public class InverseFactorial {
+
+    public static void main(String[] args) {
+
+    }
 }
