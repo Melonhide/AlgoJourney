@@ -23,11 +23,11 @@ public class InverseSingle {
         return (int)((a*power(b, mod-2, mod))%mod);
     }
 
-    public static int power(long a, int p, int mod){
-        int res = 1;
+    public static long power(long a, int p, int mod){
+        long res = 1;
         while(p>0){
             if((p&1)==1){
-                res = (int)(((long)res*a)%mod);
+                res = (res*a)%mod;
             }
             a = (a*a)%mod;
             p>>=1;
