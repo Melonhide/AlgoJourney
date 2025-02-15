@@ -5,6 +5,6 @@ package class099;
 // 0 <= m <= n <= 1000
 // 对数器验证
 public class InverseFactorial {
-
+    public static int MOD = 1000000007;
 
 }
