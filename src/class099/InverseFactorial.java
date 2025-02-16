@@ -6,5 +6,6 @@ package class099;
 // 对数器验证
 public class InverseFactorial {
     public static int MOD = 1000000007;
+    public static int LIMIT = 1000;
 
 }
