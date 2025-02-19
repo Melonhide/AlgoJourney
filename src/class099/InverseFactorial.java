@@ -34,6 +34,9 @@ public class InverseFactorial {
         return ans;
     }
 
+    public static int c1(int n, int m) {
+
+    }
 
     public static void main(String[] args){
 
