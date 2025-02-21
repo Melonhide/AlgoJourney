@@ -38,6 +38,10 @@ public class InverseFactorial {
 
     }
 
+    public static int c2(int n, int m) {
+
+    }
+
     public static void main(String[] args){
 
     }
