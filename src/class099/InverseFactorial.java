@@ -45,5 +45,6 @@ public class InverseFactorial {
     public static void main(String[] args){
         System.out.println("测试开始");
         build();
+        System.out.println("测试结束");
     }
 }
