@@ -15,6 +15,28 @@ package class099;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 
+import java.io.*;
+
 public class NumberOfBuyWay {
+    public static int n;
+    public static int[] cnts = new int[100001];
+
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StreamTokenizer in = new StreamTokenizer(br);
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+        while(in.nextToken() != StreamTokenizer.TT_EOF){
+            n = (int) in.nval;
+            for(int i = 0; i < n; i++){
+                cnts[i]++;
+            }
+            out.println(compute());
+        }
+
+    }
+
+    public static int compute(){
+
+    }
 
 }
