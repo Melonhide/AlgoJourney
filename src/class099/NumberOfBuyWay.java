@@ -22,15 +22,15 @@ public class NumberOfBuyWay {
     public static int maxn = 10001;
     public static int n;
     public static long[] dp = new long[maxn];
-    public static int[] value = new int[4];
-    public static int[] cnts = new int[4];
+    public static int[] value = new int[5];
+    public static int[] cnts = new int[5];
     public static int target;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StreamTokenizer in = new StreamTokenizer(br);
         PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
         while(in.nextToken() != StreamTokenizer.TT_EOF){
-            for(int i = 0; i < 4; i++){
+            for(int i = 1; i <= 4; i++){
                 value[i] = (int) in.nval;
                 in.nextToken();
             }
@@ -38,7 +38,7 @@ public class NumberOfBuyWay {
             in.nextToken();
             build();
             for(int i = 0; i < n; i++){
-                for(int j = 0; j < n; j++){
+                for(int j = 1; j <= 4; j++){
                     cnts[j] = (int) in.nval;
                     in.nextToken();
                 }
@@ -53,8 +53,10 @@ public class NumberOfBuyWay {
     }
 
     public static void build(){
-        for(int i = 1; i < maxn; i++){
-            
+        for(int i = 1; i <= 4; i++){
+            for(int j = value[i]; j < maxn; j++){
+                dp[j] += dp[j-value[i]];
+            }
         }
     }
 
