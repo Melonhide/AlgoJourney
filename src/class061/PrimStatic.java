@@ -3,6 +3,8 @@ package class061;
 import java.io.*;
 import java.util.Arrays;
 
+
+// Prim的反向索引堆实现，需要复习
 public class PrimStatic {
     public static int maxn = 5001, maxm = 400001;
     public static int m,n, cnt, heapsize, nodecnt;
