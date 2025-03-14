@@ -12,6 +12,9 @@ import java.io.IOException;
 // 这是输入输出处理效率很高的写法
 // 提交以下所有代码，把主类名改成Main，可以直接通过
 public class PrimStatic {
+    public int maxm = 200001;
+    public int maxn = 5001;
+    public int maxz = 10001;
     public static void main(String[] args) throws IOException{
 
     }
