@@ -15,6 +15,8 @@ public class PrimStatic {
     public int maxm = 200001;
     public int maxn = 5001;
     public int maxz = 10001;
+
+
     public static void main(String[] args) throws IOException{
 
     }
