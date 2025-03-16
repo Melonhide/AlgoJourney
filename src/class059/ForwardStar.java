@@ -10,7 +10,9 @@ public class ForwardStar {
 
     public int[] head = new int[maxn];
 
+    public void build(){
 
+    }
 
 
 
