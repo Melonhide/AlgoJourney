@@ -1,5 +1,7 @@
 package class059;
 
+import java.util.Arrays;
+
 public class ForwardStar {
 
     //点的数量
@@ -8,15 +10,50 @@ public class ForwardStar {
     //边的数量
     public static int maxm = 21;
 
-    public int[] head = new int[maxn];
+    public static int[] head = new int[maxn];
+    public static int[] next = new int[maxm];
+    public static int[] to = new int[maxm];
+    public static int[] weight = new int[maxm];
+    public static int cnt;
 
-    public void build(){
+    public static void build(int n){
+        cnt = 1;
+        Arrays.fill(head, 1, n+1, 0);
+    }
 
+    public static void addEdge(int u, int v, int w){
+        next[cnt] = head[u];
+        head[u] = cnt;
+        to[cnt] = v;
+        weight[cnt] = w;
+        cnt++;
+    }
+
+    public static void directGraph(int[][] edges){
+        for(int[] edge: edges){
+            addEdge(edge[0], edge[1], edge[2]);
+        }
     }
 
 
+    public static void undirectGraph(int[][] edges){
+        for(int[] edge: edges){
+            addEdge(edge[0], edge[1], edge[2]);
+            addEdge(edge[1], edge[0], edge[2]);
+        }
+    }
 
-
+    public static void traversal(int n){
+        for(int i = 1, cur; i <= n; i++){
+            System.out.print(i+"(next, weight) : ");
+            cur = head[i];
+            while(cur != 0){
+                System.out.print("("+to[cur]+","+weight[cur]+") ");
+                cur = next[cur];
+            }
+            System.out.println();
+        }
+    }
 
     public static void main(String[] args) {
         int n1 = 4;
