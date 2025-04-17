@@ -5,7 +5,7 @@ package class108;
 
 import java.io.*;
 
-public class TwoDimensionIntervalAddIntervalQuery1 {
+public class TwoDimensionIntervalAddIntervalQuery {
     public static int maxn = 2050;
     public static int maxm = 2050;
     public static int m;
@@ -60,13 +60,12 @@ public class TwoDimensionIntervalAddIntervalQuery1 {
         int a, b, c, d, v;
         while(in.nextToken() != StreamTokenizer.TT_EOF){
             op = in.sval;
+            in.nextToken();
             if(op.equals("X")){
-                in.nextToken();
                 n = (int) in.nval;
                 in.nextToken();
                 m = (int) in.nval;
             }else if(op.equals("L")){
-                in.nextToken();
                 a = (int) in.nval;
                 in.nextToken();
                 b = (int) in.nval;
@@ -81,7 +80,6 @@ public class TwoDimensionIntervalAddIntervalQuery1 {
                 add(a, d+1, -v);
                 add(c+1, b, -v);
             }else{
-                in.nextToken();
                 a = (int) in.nval;
                 in.nextToken();
                 b = (int) in.nval;
@@ -91,7 +89,6 @@ public class TwoDimensionIntervalAddIntervalQuery1 {
                 d = (int) in.nval;
                 System.out.println(range(a,b,c,d));
             }
-
         }
         br.close();
     }
