@@ -5,7 +5,7 @@ package class108;
 
 import java.io.*;
 
-public class TwoDimensionIntervalAddIntervalQuery {
+public class TwoDimensionIntervalAddIntervalQuery1 {
     public static int maxn = 2050;
     public static int maxm = 2050;
     public static int m;
@@ -22,33 +22,28 @@ public class TwoDimensionIntervalAddIntervalQuery {
     public static int[][] t4 = new int[maxn][maxm];
 
     //d[i][j]*i*j
-    public static void add(int[][] tree, int x, int y, int v){
+    public static void add(int x, int y, int v){
+        int v2 = x*v;
+        int v3 = y*v;
+        int v4 = x*y*v;
         for(int i = x; i<=n; i += rightone(i)){
             for(int j = y; j<=m; j += rightone(j)){
-                tree[i][j] += v;
+                t1[i][j] += v;
+                t2[i][j] += v2;
+                t3[i][j] += v3;
+                t4[i][j] += v4;
             }
         }
-    }
-
-    public static void add(int i, int j, int v){
-        add(t1, i, j, v);
-        add(t2, i, j, v*i);
-        add(t3, i, j, v*j);
-        add(t4, i, j, v*i*j);
     }
 
     public static int range(int a, int b, int c, int d){
         return sum(c, d) - sum(c, b-1) - sum(a-1, d) + sum(a-1, b-1);
     }
-    public static int sum(int i, int j){
-        return (i+1)*(j+1)*sum(t1, i, j) - (j+1)*sum(t2, i, j) - (i+1)*sum(t3, i, j) + sum(t4, i, j);
-    }
-
-    public static int sum(int[][] tree, int x, int y){
+    public static int sum(int x, int y){
         int ans = 0;
         for(int i = x; i > 0; i-=rightone(i)){
             for(int j = y; j > 0; j-=rightone(j)){
-                ans += tree[i][j];
+                ans += (x+1)*(y+1)*t1[i][j] - (y+1)*t2[i][j] - (x+1)*t3[i][j] + t4[i][j];
             }
         }
         return ans;
@@ -98,7 +93,6 @@ public class TwoDimensionIntervalAddIntervalQuery {
             }
 
         }
-
         br.close();
     }
 }
