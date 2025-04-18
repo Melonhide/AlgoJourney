@@ -8,20 +8,20 @@ public class IncreasingTriples {
     public static int maxn = 30001;
     public static int n;
     public static int size;
-    public static int[] t1 = new int[maxn];
-    public static int[] t2 = new int[maxn];
+    public static long[] t1 = new long[maxn];
+    public static long[] t2 = new long[maxn];
     public static int[] nums = new int[maxn];
     public static int[] sortednums = new int[maxn];
 
-    public static void add(int[] tree, int i, int v){
+    public static void add(long[] tree, int i, long v){
         while(i<=n){
             tree[i] += v;
             i += rightone(i);
         }
     }
 
-    public static int sum(int[] tree, int i){
-        int ans = 0;
+    public static long sum(long[] tree, int i){
+        long ans = 0;
         while(i>0){
             ans += tree[i];
             i -= rightone(i);
@@ -50,13 +50,13 @@ public class IncreasingTriples {
         br.close();
     }
 
-    public static int compute(){
+    public static long compute(){
         build();
-        int ans = 0;
+        long ans = 0;
         for(int i = 0; i < n; i++){
             ans += sum(t2, nums[i]-1);
             add(t2, nums[i], sum(t1, nums[i]-1));
-            add(t1, nums[i], 1);
+            add(t1, nums[i], 1L);
         }
 
         return ans;
