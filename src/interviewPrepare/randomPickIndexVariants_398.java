@@ -37,7 +37,44 @@ public class randomPickIndexVariants_398 {
             return ans;
     }
 
+
+    // Given an integer array with possible duplicates, randomly return an index
+    // of the maximum value in the array. Each index with the max value should have
+    // equal probability. Must run in O(n) time and use O(1) extra space.
+    //
+    // Example:
+    // Input:  [11, 11, 2, 30, 6, 30, 30, 2, 62, 62]
+    // Output: 8 or 9  (each with 50% chance, since 62 is the max and appears at indices 8 and 9)
+    public static int randomPickIndexV2(int[] nums){
+        int max = nums[0];
+        int cnt = 1;
+        int ans = 0;
+        for(int i = 1; i < nums.length; i++){
+            if(nums[i]>max){
+                cnt = 1;
+                ans = i;
+                max = nums[i];
+            }else if(nums[i] == max){
+                cnt++;
+                if((int)(Math.random()*cnt) == 0){
+                    ans = i;
+                }
+            }
+        }
+        return ans;
+    }
+
+
     public static void main(String[] args) {
+        System.out.println("Test case for variant 1");
+        testv1();
+
+        System.out.println();
+        System.out.println("Test case for variant 2");
+        testv2();
+    }
+
+    public static void testv1(){
         int[] nums = {1, 2, 3, 4};
         int k = 2;
         // 统计出现的结果
@@ -57,6 +94,38 @@ public class randomPickIndexVariants_398 {
         Collections.sort(sortedKeys);
         for (String key : sortedKeys) {
             System.out.println(key + " => " + countMap.get(key));
+        }
+    }
+
+    public static void testv2(){
+        int[] nums = {11, 11, 2, 30, 6, 30, 30, 2, 62, 62};
+        int trials = 100_000;
+
+        // 统计每个下标被选中的次数
+        Map<Integer, Integer> indexCount = new HashMap<>();
+
+        for (int i = 0; i < trials; i++) {
+            int index = randomPickIndexV2(nums);
+            indexCount.put(index, indexCount.getOrDefault(index, 0) + 1);
+        }
+
+        // 找出最大值下标
+        int maxVal = Arrays.stream(nums).max().getAsInt();
+        List<Integer> maxIndices = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == maxVal) {
+                maxIndices.add(i);
+            }
+        }
+
+        // 打印统计结果
+        System.out.println("Max value: " + maxVal);
+        System.out.println("Expected indices: " + maxIndices);
+        for (int idx : maxIndices) {
+            System.out.printf("Index %d selected %d times (%.2f%%)\n",
+                    idx,
+                    indexCount.getOrDefault(idx, 0),
+                    100.0 * indexCount.getOrDefault(idx, 0) / trials);
         }
     }
 
