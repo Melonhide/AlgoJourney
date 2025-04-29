@@ -1,4 +1,4 @@
-package class056;
+package class056_unionFind;
 
 import java.io.*;
 
