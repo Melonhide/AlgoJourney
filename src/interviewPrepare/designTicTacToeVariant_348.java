@@ -2,7 +2,7 @@ package interviewPrepare;
 
 import java.util.List;
 
-public class designTicTacToe_348 {
+public class designTicTacToeVariant_348 {
     // Given a nxn Tic-Tac-Toe board and a player's move (row, col),
     // implement a function isWin that returns true if this move causes the player to win.
     // A player wins if they have all 3 of their marks in a row, column, or diagonal.

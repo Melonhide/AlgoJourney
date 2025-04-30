@@ -1,6 +1,6 @@
 package interviewPrepare;
 
-public class validWordAbbreviation_408 {
+public class validWordAbbreviationVariant_408 {
     // Given a string `word` and an abbreviation `abbr`, return whether the abbreviation is valid.
     // Abbreviation can include:
     //  - Numbers (indicating how many characters to skip in `word`, no leading zeros allowed)
