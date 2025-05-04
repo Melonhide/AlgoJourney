@@ -1,7 +1,7 @@
 package interviewPrepare;
 
 import java.util.*;
-public class bfsWithPath {
+public class shorestPathInBinaryMatrixVariant_1091 {
     public static int[] dir = new int[]{-1,0,1,0,-1}; // (x-1, y); (x, y+1); (x+1,y); (x,y-1);
 
 

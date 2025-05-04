@@ -46,7 +46,7 @@ public class mergeKSortedListsVariant_23 {
     // Output sequence:
     // -> 1, 2, 3
 
-
+    //Variant 3: merge interval(LC56)
 
     public static void main(String[] args){
         int[][] nums = {
