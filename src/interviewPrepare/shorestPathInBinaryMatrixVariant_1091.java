@@ -4,7 +4,7 @@ import java.util.*;
 public class shorestPathInBinaryMatrixVariant_1091 {
     public static int[] dir = new int[]{-1,0,1,0,-1}; // (x-1, y); (x, y+1); (x+1,y); (x,y-1);
 
-
+    // Find the shortest path in binary matrix.
     public static List<List<Integer>> bfs_with_path(int[][] nums){
         int n = nums.length;
         int m = nums[0].length;
