@@ -39,8 +39,6 @@ public class verticalOrderTraversalOfBinaryTreeVariant_987 {
             System.out.print("]");
             System.out.println();
         }
-
-
     }
 
     public static void f(TreeNode root, int x, int y){
@@ -57,13 +55,24 @@ public class verticalOrderTraversalOfBinaryTreeVariant_987 {
     }
 
     // Variant 2: Print the 1D order
-
+    public static void print1DVerticalOrder(TreeNode root){
+        map = new HashMap<>();
+        min = 0;
+        max = 0;
+        f(root, 0, 0);
+        for(int i = min; i<= max ; i++){
+            while(map.get(i).size() != 0){
+                System.out.print(map.get(i).poll()[1] + " ");
+            }
+        }
+    }
 
 
     public static void main(String[] args){
         Integer[] nums = new Integer[]{3,9,20,null,null,15,7};
         TreeNode root = parse(nums);
         printVerticalOrder(root);
+        print1DVerticalOrder(root);
     }
 
     public static TreeNode parse(Integer[] nums){
