@@ -18,8 +18,34 @@ public class closestBSTvalueVariant_270 {
     // Only allow integer target(Too easy, pass);
 
     // Variant 2:
-    // Find kth closest value to target in Binary Search Tree
-    public static int kThClosestBSTValue(TreeNode root, int target, int k){
-        return 0;
+    // Find kth closest value to target in Binary Search Tree LC 272
+
+
+
+
+    public static TreeNode parse(Integer[] nums){
+        TreeNode[] res = new TreeNode[nums.length];
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] != null){
+                res[i] = new TreeNode(nums[i]);
+            }
+        }
+        for(int i = 0; i < nums.length; i++){
+            TreeNode cur = res[i];
+            if(cur==null){
+                continue;
+            }
+            TreeNode left = i*2+1< nums.length? res[i*2+1]:null;
+            TreeNode right = i*2+2< nums.length? res[i*2+2]:null;
+            cur.left = left;
+            cur.right = right;
+        }
+
+
+        return res[0];
+    }
+
+    public static void main(String[] args){
+
     }
 }
