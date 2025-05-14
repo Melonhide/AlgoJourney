@@ -19,7 +19,7 @@ public class verticalOrderTraversalOfBinaryTreeVariant_987 {
           this.left = left;
           this.right = right;
       }
-  }
+    }
     // Variant 1: Print the order
 
     static HashMap<Integer, PriorityQueue<int[]>> map = new HashMap<>();
