@@ -7,5 +7,7 @@ public class mergeIntervalsVariant_56 {
     // Input [[1,3],[5,8],[11,15]]
     // Output
 
-    public List<int[]>
+    public List<int[]> mergeIntervals(){
+
+    }
 }
