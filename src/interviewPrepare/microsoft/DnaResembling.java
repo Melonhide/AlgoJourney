@@ -2,7 +2,7 @@ package interviewPrepare.microsoft;
 
 import java.util.*;
 
-public class dna_resembling {
+public class DnaResembling {
     public static class sequence{
         public String start_tag;
         public String end_tag;
