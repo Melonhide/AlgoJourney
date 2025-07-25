@@ -67,8 +67,9 @@ public class RateLimiter_multiUserSlidingWindow {
                 userCount.put(userId, curCnt);
                 if(!hist.isEmpty() && hist.peekLast().t==timestamp){
                     hist.peekLast().increase();
+                }else{
+                    hist.add(new Node(timestamp));
                 }
-                hist.add(new Node(timestamp));
             }
             return true;
         }
