@@ -8,4 +8,8 @@ package class110;
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 
 public class SegmentTreeAddQuerySum {
+    public static int maxn = 100001;
+
+
+
 }
