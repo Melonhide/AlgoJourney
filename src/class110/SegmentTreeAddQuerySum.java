@@ -9,7 +9,18 @@ package class110;
 
 public class SegmentTreeAddQuerySum {
     public static int maxn = 100001;
+    public static long[] arr = new long[maxn];
+    public static long[] sum = new long[maxn>>2];
+    public static long[] lazy = new long[maxn>>2];
 
+    public static void build(int l, int r, int i){
+        if(l == r){
+            sum[i] = arr[l];
+            return;
+        }
+
+
+    }
 
 
 }
