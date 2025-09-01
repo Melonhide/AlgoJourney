@@ -1,4 +1,4 @@
-package interviewPrepare.uber.phoneScreening;
+package interviewPrepare.uber.vo;
 
 public class SortArrayBySquares {
 
