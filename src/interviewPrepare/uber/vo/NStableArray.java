@@ -10,13 +10,15 @@ public class NStableArray {
 
     public static int getNStableArray(int[] nums, int n){
         int len = nums.length;
-        int[] maxQueue = new int[n];
-        int[] minQueue = new int[n];
+        int[] maxQueue = new int[len];
+        int[] minQueue = new int[len];
         int maxl = 0;
         int maxr = 0;
         int minl = 0;
         int minr = 0;
 
+        int resl = 0;
+        int resr = 0;
         int res = 0;
         for(int l = 0, r = 0, curmin, curmax; r < len; r++){
             while(maxr>maxl && (nums[maxQueue[maxr-1]]<=nums[r])){
@@ -45,11 +47,20 @@ public class NStableArray {
                 curmax = maxQueue[maxl];
             }
             res = Math.max(r-l+1, res);
+
+//            if(r-l+1>res){
+//                res=r-l+1;
+//                resr = r;
+//                resl = l;
+//            }
         }
+
+//        System.out.println(resl + ":" + resr);
         return res;
     }
 
     public static void main(String[] args){
-
+        int[] nums = new int[]{4, 2, 3, 6, 2, 2, 3, 2, 7 , 4};
+        System.out.println(getNStableArray(nums, 2));
     }
 }
