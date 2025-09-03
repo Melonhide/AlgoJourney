@@ -47,15 +47,8 @@ public class NStableArray {
                 curmax = maxQueue[maxl];
             }
             res = Math.max(r-l+1, res);
-
-//            if(r-l+1>res){
-//                res=r-l+1;
-//                resr = r;
-//                resl = l;
-//            }
         }
 
-//        System.out.println(resl + ":" + resr);
         return res;
     }
 
